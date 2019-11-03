@@ -1,29 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+
 public class PlayerHandler : MonoBehaviour
-{
-    
-   
+{   
     public GameManager gameManager;
     public TextMeshProUGUI healthText;
-    public int health;
     public GameObject gameOverScreen;
     public GameObject inGameScreen;
+    [HideInInspector] public int health;
 
-
-    void Start(){
-        health = PlayerPrefs.GetInt("Health",100);
-    }
-
-    void Update(){
-        healthText.text = health.ToString();
-        if(health <= 0){
-            gameOverScreen.SetActive(true);
-            inGameScreen.SetActive(false);
-        }
+    private void Start()
+    {
+        health =  PlayerPrefs.GetInt("Health", 100);
     }
 
     public void GiveDamage(int damage)
@@ -32,6 +22,9 @@ public class PlayerHandler : MonoBehaviour
         if (health <= 0)
         {
             gameManager.isPlayerDead = true;
+            gameOverScreen.SetActive(true);
+            inGameScreen.SetActive(false);
         }
+        healthText.text = health.ToString();
     }
 }

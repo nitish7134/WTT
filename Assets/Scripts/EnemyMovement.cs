@@ -21,7 +21,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start () 
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        gameManager = FindObjectOfType<GameManager>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -30,18 +30,20 @@ public class EnemyMovement : MonoBehaviour
   
     private void Update()
     {
-        if (gameManager.isPlayerDead)
-            Destroy(this.gameObject);
-        if(!isDead){
-            transform.LookAt(target);
-            agent.SetDestination(target.position);
-            if (health <= 0)
-            {
-                isDead = true;
-                GetComponent<Animator>().SetBool("Dead",true);
-                gameManager.enemyDown();
-                StartCoroutine("AddDelay"); 
-            }
+        /*if (gameManager.isPlayerDead)
+            Destroy(this.gameObject);*/
+        if (isDead)
+            return;
+
+        transform.LookAt(target);
+        agent.SetDestination(target.position);
+
+        if (health <= 0)
+        {
+            isDead = true;
+            animator.SetBool("Dead",true);
+            gameManager.EnemyDown();
+            Destroy(this.gameObject, 2f);
         }
     }
 
@@ -56,17 +58,11 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void OnCollisionExit(Collision collision)
-    {   
+    {
         if (collision.gameObject.tag == "Player")
         {
             isAttacking = false;
             animator.SetBool("Attack", false);
         }
     }
-
-    IEnumerator AddDelay(){
-        yield return new WaitForSeconds(2);
-        Destroy(this.gameObject); 
-    }
-
 }

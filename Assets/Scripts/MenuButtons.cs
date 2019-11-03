@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class MenuButtons : MonoBehaviour
 {
@@ -13,36 +9,26 @@ public class MenuButtons : MonoBehaviour
 
     private void Start()
     {
-        highscore.text = "Highscore: " + PlayerPrefs.GetInt("HighScore");
+        highscore.text = "High Score: " + PlayerPrefs.GetInt("HighScore");
         sceneTransition = FindObjectOfType<SceneTransition>();
     }
 
-    public void ExitToMenu()
+    public void RestartGame()
     {
-        sceneTransition.InitiateTransition();
-        StartCoroutine(LoadScene(0));
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetInt("Health", 100);
+        PlayerPrefs.SetInt("CurrentScore", 0);
+        sceneTransition.InitiateTransition(1);
+    }
+
+    public void MainMenu()
+    {
+        sceneTransition.InitiateTransition(-1);
     }
 
     public void ExitGame()
     {
         Application.Quit();
-    }
-
-    public void StartGame()
-    {
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetInt("Helth",100);
-        PlayerPrefs.SetInt("CurrentScore",0);
-
-        sceneTransition.InitiateTransition();
-        StartCoroutine(LoadScene(2));
-        
-    }
-
-    private IEnumerator LoadScene(int sceneIndex)
-    {
-        yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(sceneIndex);
     }
 
 }

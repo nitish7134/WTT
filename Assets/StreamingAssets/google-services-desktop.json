@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "660877669709",
+    "firebase_url": "https://wheel-through-time.firebaseio.com",
+    "project_id": "wheel-through-time",
+    "storage_bucket": "wheel-through-time.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660877669709:android:6f1bdfb8bef854318e7304",
+        "android_client_info": {
+          "package_name": "com.ProjectPlay.WheelThroughTime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660877669709-pcqpg4qc5valntbtdkigjdvctla6ua3g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ProjectPlay.WheelThroughTime",
+            "certificate_hash": "690d3903c8d445a434465f0f301102d513d5ff55"
+          }
+        },
+        {
+          "client_id": "660877669709-43f5s7h9fvr4p0uuk8vsrnhuhue5ib4m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxKmQjvcSGg_VTeUmImJfTcdwGMQ43rn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660877669709-43f5s7h9fvr4p0uuk8vsrnhuhue5ib4m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

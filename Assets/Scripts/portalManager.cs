@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class portalManager : MonoBehaviour
+public class PortalManager : MonoBehaviour
 {
     public int portalIndex;
+
+   
 
     private SceneTransition sceneTransition;
 
     void Start()
     {
         sceneTransition = FindObjectOfType<SceneTransition>();
-        StartCoroutine("Wait"); 
+        Destroy(this.gameObject, 5);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,20 +19,10 @@ public class portalManager : MonoBehaviour
         if(other.tag == "Player")
         {
             PlayerPrefs.SetInt("Health", GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHandler>().health);
-            PlayerPrefs.SetInt("CurrentScore", GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().score);
-            sceneTransition.InitiateTransition();
-            StartCoroutine(LoadScene(portalIndex + 1));
+            PlayerPrefs.SetInt("CurrentScore", FindObjectOfType<GameManager>().score);
+            sceneTransition.InitiateTransition(portalIndex);
         }
     }
-
-    IEnumerator Wait(){
-        yield return new WaitForSeconds(10);
-        Destroy(this.gameObject);
-    }
-
-    private IEnumerator LoadScene(int sceneIndex)
-    {
-        yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(sceneIndex);
-    }
+   
+   
 }
